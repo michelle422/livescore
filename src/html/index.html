@@ -7,6 +7,23 @@
 </head>
 <body>
     <h2>Live Score Demo</h2>
-    <button class="button" type="button">Start Game</button>
+    <button class="button" type="button" onclick="startGame('scoreBoard')">Start Game</button>
+    <table id="scoreBoard" style="width:80%">
+    	<tr>
+    		<td id="home"></td>
+    		<td> - </td>
+    		<td id="away"></td>
+    	</tr>
+    </table>
+    <script>
+    	function startGame(idName) {
+    		var x = document.getElementById(idName);
+    		if (x.style.display === "none") {
+    			x.style.display = "block";
+    		} else {
+    		    x.style.display = "none";
+    		}
+    	}
+    </script>
 </body>
 </html>
