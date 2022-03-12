@@ -1,0 +1,17 @@
+body {
+  font-family: "Lato", sans-serif;
+  color: #4472C4;
+}
+h2 {
+ background-color: #4472C4;
+ text-align: center;
+ color: white;
+}
+.button {
+	display: inline-block;
+	min-width: 90px;
+	margin-top: 20px;
+	padding: 2px;
+/*	border: #bbb solid 1px; */
+	cursor: pointer;
+}
