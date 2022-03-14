@@ -7,14 +7,16 @@ const homeMap = new Map([
 	["Spain", 0],
 	["Germany", 0], 
 	["Uruguay", 0], 
-	["Argentina", 0]
+	["Argentina", 0], 
+	["Belgium", 0]
 ]);
 const awayMap = new Map([
 	["Canada", 0], 
 	["Brazil", 0], 
 	["France", 0], 
 	["Italy", 0], 
-	["Australia", 0]
+	["Australia", 0], 
+	["Norway", 0]
 ]);
 const gamesArray = [];
 	
@@ -25,6 +27,7 @@ function readHomeAndAway() {
 	var awayScore = 0;
 	var homeIndex = 0;
 	var awayIndex = 0;
+	var numGames = 0;
 
 	homeMap.forEach(function(value, key) {
 		homeIndex++;
@@ -47,6 +50,7 @@ function readHomeAndAway() {
 		document.getElementById("awayteam").innerHTML = awayTeam;		
 		document.getElementById("homescore").innerHTML = homeScore;
 		document.getElementById("awayscore").innerHTML = awayScore;
+		numGames++;
 	}
 
 }
@@ -73,7 +77,9 @@ function startGame(idName) {
 	var x = document.getElementById(idName);
 	readHomeAndAway();
 
-	if (x.style.display === "none") {
+	var home = document.getElementById("hometeam").innerHTML;
+	var away = document.getElementById("awayteam").innerHTML;
+	if (x.style.display === "none" && home != "" && away != "") {
 		x.style.display = "block";
 	} 
 }
@@ -124,9 +130,11 @@ function finishGame(idName) {
 	}
 	
 	for (let i = 0; i < totalScoresArr.length; i++) {
-		gamesArray[i] = totalScoresArr[i] + " | " + homeTeamsArr[i] + " - " + awayTeamsArr[i] + " | " + 
-			homeScoresArr[i] + " - " + awayScoresArr[i];
-		console.log("Score: " + gamesArray[i]);
+		if (homeTeamsArr[i] != "" && awayTeamsArr[i] != "") {
+			gamesArray[i] = totalScoresArr[i] + " | " + homeTeamsArr[i] + " - " + awayTeamsArr[i] + " | " + 
+				homeScoresArr[i] + " - " + awayScoresArr[i];
+			console.log("Score: " + gamesArray[i]);
+		}
 	}
 				
 	if (x.style.display === "block") {
@@ -144,17 +152,66 @@ function summaryOfGames(idName) {
 		var indexB = parseInt(gameParts[0]);
 		return indexB - indexA;
 	});
+
+	const tbl = document.getElementById(idName);
+//	tbl.setAttribute("id", "summary");
+//	tbl.style.width = "60%";
+//	tbl.style.display = "none";
+
+	if (tbl.childElementCount > 0) {
+		while (tbl.lastChild) {
+			tbl.removeChild(tbl.lastChild);
+		}
+	}
+	
 	for (let i = 0; i < gamesArray.length; i++) {
 		console.log(gamesArray[i]);
 		gameParts = gamesArray[i].split(" | ");
-		document.getElementById("teams").innerHTML = gameParts[1];
-		document.getElementById("scores").innerHTML = gameParts[2];
+		
+		const tr = document.createElement("tr");
+		for (let j = 1; j < gameParts.length; j++) {
+			const td = document.createElement("td");
+			if (j === 1 && gameParts[j] != " - ") {
+				td.setAttribute("id", "teams");
+				td.appendChild(document.createTextNode(gameParts[j] + " : "));
+			}
+			if (j === 2) {
+				td.setAttribute("id", "scores");
+				td.appendChild(document.createTextNode(gameParts[j]));
+			}
+			tr.appendChild(td);
+		}
+		
+		tbl.appendChild(tr);
+//		document.getElementById("teams").innerHTML = gameParts[1];
+//		document.getElementById("scores").innerHTML = gameParts[2];
 	}
+//	} 
+	/*else {
+		var trows = tbl.getElementsByTagName("tr");
+		for (let i = 0; i < gamesArray.length; i++) {
+			console.log(gamesArray[i]);
+			gameParts = gamesArray[i].split(" | ");
+			
+			var tcells = tbl.getElementsByTagName("td");
+			for (let j = 1; j < gameParts.length; j++) {
+				if (j === 1) {
+					tcells[j].getElementById("teams").innerHTML = gameParts[j] + " : ";
+//					tcells.appendChild(document.createTextNode(gameParts[j] + " : "));
+				}
+				if (j === 2) {
+					tcells[j].getElementById("scores").innerHTML = gameParts[j];
+//					tcells.appendChild(document.createTextNode(gameParts[j]));
+				}
+			}
+				
+		}
+	}*/
 	
-	var x = document.getElementById(idName);
+//	var x = document.getElementById(idName);
 
-	if (x.style.display === "none") {
-		x.style.display = "block";
+	if (tbl.style.display === "none") {
+		tbl.style.display = "block";
 	} 
 }
 
