@@ -8,8 +8,8 @@
 <body>
     <h2>Live Score Demo</h2>
     <button class="button" type="button" onclick="startGame('scoreBoard')">Start Game</button>
-    <button class="button" type="button" onclick="finishGame('scoreBoard')">Finish Game</button>
     <button class="button" type="button" onclick="updateScores()">Update Score</button>
+    <button class="button" type="button" onclick="finishGame('scoreBoard')">Finish Game</button>
     <button class="button" type="button" onclick="summaryOfGames('summary')">Summary of Games</button>
 	<br>
     <table id="scoreBoard" style="width:60%;display:none">
@@ -23,11 +23,6 @@
     </table>
     <br>
     <table id="summary" style="width:60%;display:none">
-    	<tr>
-    		<td id="teams"></td>
-    		<td> : </td>
-    		<td id="scores"></td>
-    	</tr>
     </table>
     <script type="text/javascript" src="../js/livescore.js"></script>
 </body>
