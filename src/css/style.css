@@ -9,9 +9,15 @@ h2 {
 }
 .button {
 	display: inline-block;
-	min-width: 90px;
-	margin-top: 20px;
-	padding: 2px;
+	min-width: 360px;
+	margin-top: 80px;
+	padding: 8px;
 /*	border: #bbb solid 1px; */
 	cursor: pointer;
+}
+.hometeam, .homescore {
+	text-align: right;
+}
+#dash {
+	text-align: center;
 }
